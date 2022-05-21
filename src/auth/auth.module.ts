@@ -6,11 +6,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { AtStrategy, RtStrategy } from './strategies';
 
 @Module({
-  imports: [
-    JwtModule.register({
-      secret: 'at-secret',
-    }),
-  ],
+  imports: [JwtModule.register({})],
   providers: [AuthService, PrismaService, AtStrategy, RtStrategy],
   controllers: [AuthController],
 })

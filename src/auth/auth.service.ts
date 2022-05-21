@@ -116,10 +116,9 @@ export class AuthService {
       },
     });
 
-    console.log(user);
-    console.log(rt);
-    if (!user || (await bcrypt.compare(rt, user.hashedRt)))
-      throw new ForbiddenException('Access Denied!');
+    const rtMaches = await bcrypt.compare(rt, user.hashedRt);
+
+    if (!user || !rtMaches) throw new ForbiddenException('Access Denied!');
 
     const tokens = await this.getTokens(user.id, user.email);
     await this.updateRtHash(user.id, tokens.refresh_token);
